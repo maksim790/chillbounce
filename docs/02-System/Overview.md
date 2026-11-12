@@ -10,6 +10,8 @@
 
 ## Планируемая архитектура
 
+В текущей frontend-задаче добавляются исходники shell host и wallet remote; контракты и команды описаны в [Frontend](Frontend.md), состояние приёмки — в [тикете](../Tasks/frontend-shell-wallet.md). Остальные перечисленные ниже приложения остаются планами.
+
 Основа монорепозитория настроена. Будущие React/Vite микрофронтенды shell (host), wallet, crypto и admin (remotes), api (NestJS), worker (фоновая обработка), packages/ui, contracts и config заданы в [тикете](../Tasks/initialize-monorepo.md), но не созданы. Module Federation и backend-монолит остаются планами. См. [решения](../03-Decisions/Decision-Index.md) и [запланированный объём](../04-Roadmap/Overview.md). Federation runtime, backend-модули, публичные контракты и модель развёртывания worker пока не установлены.
 
 ## Локальный Git

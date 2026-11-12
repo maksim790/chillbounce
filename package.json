@@ -6,6 +6,9 @@
 		"node": "^22.13.0 || >=24.0.0"
 	},
 	"scripts": {
+		"dev": "pnpm --parallel --filter @chillbounce/shell --filter @chillbounce/wallet run dev",
+		"build": "pnpm --filter @chillbounce/wallet run build && pnpm --filter @chillbounce/shell run build",
+		"preview": "pnpm --parallel --filter @chillbounce/shell --filter @chillbounce/wallet run preview",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"format": "prettier . --write",
@@ -16,6 +19,8 @@
 		"@eslint/js": "10.0.1",
 		"eslint": "10.14.0",
 		"eslint-config-prettier": "10.1.8",
+		"eslint-plugin-react-hooks": "7.1.1",
+		"eslint-plugin-react-refresh": "0.5.7",
 		"prettier": "3.10.1",
 		"typescript": "6.0.3",
 		"typescript-eslint": "8.72.2"

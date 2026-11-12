@@ -17,7 +17,7 @@ Chillbounce — планируемая кастодиальная криптов
 
 ## Команды разработки и проверки
 
-Workspace использует pnpm без Nx. Команды определены в [package.json](package.json): `pnpm install`, `pnpm lint`, `pnpm lint:fix`, `pnpm format`, `pnpm format:check`, `pnpm typecheck`. Воспроизводимая установка: `pnpm install --frozen-lockfile`. Версии, запуск без глобального pnpm и расширение конфигураций — в [руководстве](docs/05-Engineering/Tooling.md); результаты проверок — в [тикете](docs/Tasks/initialize-monorepo.md). Пока нет приложений, typecheck не имеет целей. Команды запуска, сборки и тестов приложений ещё не определены; не придумывайте их.
+Workspace использует pnpm без Nx. Команды определены в [package.json](package.json): `pnpm install`, `pnpm lint`, `pnpm lint:fix`, `pnpm format`, `pnpm format:check`, `pnpm typecheck`, `pnpm dev`, `pnpm build`, `pnpm preview`. Воспроизводимая установка: `pnpm install --frozen-lockfile`. Typecheck проверяет shell/wallet и их Vite-конфигурации; перед build/preview задайте публичный VITE_WALLET_REMOTE_URL по [Frontend](docs/02-System/Frontend.md). Версии и запуск без глобального pnpm — в [руководстве](docs/05-Engineering/Tooling.md); результаты — в [тикете frontend](docs/Tasks/frontend-shell-wallet.md). В этой задаче пользователь исключил Playwright и тестовую инфраструктуру: проверки CLI и ручные browser checks без автоматических browser tests.
 
 Согласованная [политика проверки](docs/05-Engineering/Testing-Strategy.md) обязательна. Для каждого изменения проверяйте согласованные критерии задачи, актуальность затронутой документации и Markdown-ссылки. Финансовые и блокчейн-изменения требуют соответствующих условных проверок. Отмечайте недоступные и не запущенные проверки явно.
 

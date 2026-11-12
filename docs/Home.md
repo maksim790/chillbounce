@@ -24,6 +24,7 @@ Chillbounce — планируемая кастодиальная платфор
 
 ## Задачи
 
+- [Frontend: shell и remote wallet — ready](Tasks/frontend-shell-wallet.md)
 - [Инициализация TypeScript monorepo на pnpm Workspaces — done](Tasks/initialize-monorepo.md)
 - [Инициализация Git-репозитория](Tasks/initialize-git-repository.md)
 - [README с навигацией по документации](Tasks/add-root-readme.md)
