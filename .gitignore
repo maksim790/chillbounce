@@ -27,7 +27,8 @@ temp/
 
 # Editors and operating systems
 .idea/
-.vscode/
+.vscode/*
+!.vscode/settings.json
 *.suo
 *.user
 .DS_Store
