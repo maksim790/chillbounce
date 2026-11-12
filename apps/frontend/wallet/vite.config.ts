@@ -1,6 +1,8 @@
 import { federation } from '@module-federation/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import path from 'node:path';
+import tailwindcss from '@tailwindcss/vite';
 
 const shellOrigins = ['http://127.0.0.1:5173', 'http://localhost:5173'];
 
@@ -18,6 +20,7 @@ export default defineConfig({
 				'react-dom': { singleton: true, requiredVersion: '19.3.1' },
 			},
 		}),
+		tailwindcss(),
 	],
 	server: {
 		host: '127.0.0.1',
@@ -31,5 +34,10 @@ export default defineConfig({
 		port: 5174,
 		strictPort: true,
 		cors: { origin: shellOrigins },
+	},
+	resolve: {
+		alias: {
+			'@': path.resolve(import.meta.dirname, './src'),
+		},
 	},
 });

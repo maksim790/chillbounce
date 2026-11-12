@@ -2,6 +2,8 @@ import { federation } from '@module-federation/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig, loadEnv } from 'vite';
 import { resolveWalletRemoteUrl } from './remote-url.ts';
+import tailwindcss from '@tailwindcss/vite';
+import path from 'node:path';
 
 export default defineConfig(({ command, mode, isPreview }) => {
 	const env = loadEnv(mode, import.meta.dirname, 'VITE_');
@@ -25,6 +27,7 @@ export default defineConfig(({ command, mode, isPreview }) => {
 					'react-dom': { singleton: true, requiredVersion: '19.3.1' },
 				},
 			}),
+			tailwindcss(),
 		],
 		server: {
 			host: '127.0.0.1',
@@ -33,5 +36,10 @@ export default defineConfig(({ command, mode, isPreview }) => {
 			origin: 'http://127.0.0.1:5173',
 		},
 		preview: { host: '127.0.0.1', port: 5173, strictPort: true },
+		resolve: {
+			alias: {
+				'@': path.resolve(import.meta.dirname, './src'),
+			},
+		},
 	};
 });

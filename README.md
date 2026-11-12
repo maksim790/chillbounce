@@ -6,7 +6,7 @@ Chillbounce — планируемая кастодиальная криптов
 
 ## Разработка
 
-TypeScript monorepo на pnpm Workspaces содержит технические React/Vite приложения `apps/shell` (host) и `apps/wallet` (remote и standalone). Общие библиотеки, backend и полноценные пользовательские интерфейсы ещё не созданы. Nx и другой task runner не используются.
+TypeScript monorepo на pnpm Workspaces содержит технические React/Vite приложения `apps/frontend/shell` (host) и `apps/frontend/wallet` (remote и standalone). В `apps/frontend/packages/ui` находится общий пакет со стилями shadcn, Tailwind и компонентом Button, который используется в Wallet. Backend и полноценные пользовательские интерфейсы ещё не созданы. Nx и другой task runner не используются.
 
 Нужен Node.js `^22.13.0 || >=24.0.0` и pnpm версии из [package.json](package.json). Версии, совместимость и расширение конфигураций описаны в [руководстве по инструментам](docs/05-Engineering/Tooling.md).
 
@@ -37,7 +37,7 @@ npm exec --yes --package=pnpm@12.18.0 -- pnpm install
 
 Для воспроизводимой установки используйте `pnpm install --frozen-lockfile`.
 
-Команды frontend: `pnpm dev` запускает shell на http://127.0.0.1:5173/ и wallet на http://127.0.0.1:5174/. `pnpm typecheck` проверяет оба приложения и их Vite-конфигурации. Для build/preview сначала скопируйте `apps/shell/.env.example` в `apps/shell/.env.local`, затем выполните `pnpm build` и `pnpm preview`. Dev и preview занимают одну пару портов и запускаются по очереди. Подробности и границы — в [Frontend](docs/02-System/Frontend.md).
+Команды frontend: `pnpm dev` запускает shell на http://127.0.0.1:5173/ и wallet на http://127.0.0.1:5174/. `pnpm typecheck` проверяет оба приложения и их Vite-конфигурации. Для build/preview сначала скопируйте `apps/frontend/shell/.env.example` в `apps/frontend/shell/.env.local`, затем выполните `pnpm build` и `pnpm preview`. Dev и preview занимают одну пару портов и запускаются по очереди. Подробности и границы — в [Frontend](docs/02-System/Frontend.md).
 
 ## Документация
 

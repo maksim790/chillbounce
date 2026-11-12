@@ -1,6 +1,6 @@
 # Стандарт структуры frontend
 
-Статус: согласованный целевой стандарт, ещё не внедрён в исходники. Основание — [дизайн v3](../superpowers/specs/2026-11-12-frontend-structure-shadcn-design.md), [план v2](../superpowers/plans/2026-11-12-frontend-structure-shadcn.md) и [тикет](../Tasks/frontend-structure-shadcn.md). Текущие приложения находятся в apps/shell и apps/wallet, UI-пакета, shadcn/ui и Tailwind пока нет. Действующие команды и runtime-контракт описаны в [Frontend](../02-System/Frontend.md).
+Статус: согласованный целевой стандарт, частично внедрён в исходники. Основание — [дизайн v3](../superpowers/specs/2026-11-12-frontend-structure-shadcn-design.md), [план v2](../superpowers/plans/2026-11-12-frontend-structure-shadcn.md) и [документационный тикет](../Tasks/frontend-structure-shadcn.md). В ходе последующей ручной настройки приложения перенесены в apps/frontend/shell и apps/frontend/wallet, подготовлен @chillbounce/ui с Tailwind, общей темой shadcn и компонентом Button. Внутренние слои app/pages/features/shared пока не добавлены. Действующие команды и runtime-контракт описаны в [Frontend](../02-System/Frontend.md).
 
 ## Целевая структура
 

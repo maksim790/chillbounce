@@ -11,7 +11,7 @@ Completed: 2026-11-12T17:14:57Z
 ## Основания и выбор
 
 - [Продукт](../01-Product/Overview.md) и [бриф](../06-Sources/Project-Brief.md) задают вход, балансы, пополнения, внутренние переводы, выводы, историю и административный мониторинг.
-- [Frontend](../02-System/Frontend.md), [Shell App](../../apps/shell/src/App.tsx) и [Wallet](../../apps/wallet/src/Wallet.tsx) подтверждают только техническую связку, обработку ошибок и счётчик. Эти исходники не задают будущие бизнес-правила.
+- [Frontend](../02-System/Frontend.md), [Shell App](../../apps/frontend/shell/src/App.tsx) и [Wallet](../../apps/frontend/wallet/src/Wallet.tsx) подтверждают только техническую связку, обработку ошибок и счётчик. Эти исходники не задают будущие бизнес-правила.
 - [Открытые вопросы](../04-Roadmap/Open-Questions.md) оставляют auth, API, финансовые правила и deployment нерешёнными.
 - Пользователь выбрал все пользовательские операции кошелька в Wallet; назначение crypto — позже. Полное распределение обязанностей в [дизайне v1](../superpowers/specs/2026-11-12-shell-wallet-responsibilities-design.md) согласовано отдельным ответом «Подтвердить дизайн»; запись согласования 2026-11-12T17:07:43Z, покрывает один этот тикет и будущие обязанности, включая вход/сессию в Shell.
 - При подготовке дерево чистое, dev совпадает с origin/dev после fetch. Ветка: feature/document-shell-wallet-responsibilities. Действуют [инструкции проекта](../../AGENTS.md).

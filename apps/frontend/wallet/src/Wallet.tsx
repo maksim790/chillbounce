@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import './index.css';
+import { Button } from '@chillbounce/ui/components/button';
 
 export default function Wallet() {
 	const [checks, setChecks] = useState(0);
@@ -10,12 +12,12 @@ export default function Wallet() {
 				Технический remote Chillbounce. Данные кошелька ещё не
 				подключены.
 			</p>
-			<button
+			<Button
 				type="button"
 				onClick={() => setChecks((value) => value + 1)}
 			>
 				Проверить React
-			</button>
+			</Button>
 			<p aria-live="polite">Проверок: {checks}</p>
 		</section>
 	);

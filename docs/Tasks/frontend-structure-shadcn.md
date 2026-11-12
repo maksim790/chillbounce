@@ -11,7 +11,7 @@ Completed: 2026-11-12T17:44:35Z
 ## Основания
 
 - [Frontend](../02-System/Frontend.md) и [тикет обязанностей](document-shell-wallet-responsibilities.md) задают Shell/Wallet, backend-границу и открытые auth/router/API решения.
-- [Исходники Shell](../../apps/shell/src/App.tsx), [Wallet](../../apps/wallet/src/Wallet.tsx), manifests и Vite configs подтверждают техническую federation-связку и плоский src. Сейчас packages/ui, shadcn/ui и Tailwind отсутствуют.
+- [Исходники Shell](../../apps/frontend/shell/src/App.tsx), [Wallet](../../apps/frontend/wallet/src/Wallet.tsx), manifests и Vite configs подтверждают техническую federation-связку и плоский src. Сейчас packages/ui, shadcn/ui и Tailwind отсутствуют.
 - [pnpm workspace](../../pnpm-workspace.yaml) уже включает apps/* и packages/*; новый task runner не нужен.
 - [Официальная monorepo-документация shadcn/ui](https://ui.shadcn.com/docs/monorepo), полученная через Context7, описывает shared UI package, aliases и package exports. Это источник механизма, не пользовательского выбора архитектуры.
 - При подготовке рабочее дерево чистое; после fetch dev совпадает с origin/dev. Создана feature/frontend-structure-shadcn. Источник новых требований — текущая беседа, публичный URL недоступен.

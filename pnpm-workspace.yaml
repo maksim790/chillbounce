@@ -1,5 +1,7 @@
 packages:
-    - 'apps/*'
+    - 'apps/frontend/*'
+    - 'apps/frontend/packages/*'
+    - 'apps/api'
     - 'packages/*'
 minimumReleaseAgeExclude:
     - prettier@3.10.1

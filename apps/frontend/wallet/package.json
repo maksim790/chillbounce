@@ -1,5 +1,5 @@
 {
-	"name": "@chillbounce/shell",
+	"name": "@chillbounce/wallet",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -10,8 +10,11 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@tailwindcss/vite": "^4.3.5",
 		"react": "19.3.1",
-		"react-dom": "19.3.1"
+		"react-dom": "19.3.1",
+		"tailwindcss": "^4.3.5",
+		"@chillbounce/ui": "workspace:*"
 	},
 	"devDependencies": {
 		"@module-federation/vite": "1.23.11",

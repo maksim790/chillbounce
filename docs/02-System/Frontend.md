@@ -4,14 +4,28 @@
 
 ## Границы
 
-- [Shell](../../apps/shell/package.json) — host, контейнер страницы, loading UI и обработка ошибок remote.
-- [Wallet](../../apps/wallet/package.json) — remote и самостоятельное приложение. Экспорт `wallet/Wallet` — default React-компонент без props и без собственного React root. Standalone entry монтирует тот же компонент.
+- [Shell](../../apps/frontend/shell/package.json) — host, контейнер страницы, loading UI и обработка ошибок remote.
+- [Wallet](../../apps/frontend/wallet/package.json) — remote и самостоятельное приложение. Экспорт `wallet/Wallet` — default React-компонент без props и без собственного React root. Standalone entry монтирует тот же компонент.
 - React/react-dom 19.3.1 согласованы и объявлены shared singleton в обоих Vite configs; используется @module-federation/vite 1.23.11 и loaded-first. Shell потребляет remote динамически, без импорта исходников wallet. TypeScript-declaration в shell описывает текущую узкую форму экспорта; развитие props потребует согласованного изменения контракта.
-- Экран содержит только заголовки и локальный счётчик проверки React state. Балансы, токены, транзакции, auth, RPC, backend, router и UI kit отсутствуют.
+- Экран содержит только заголовки и локальный счётчик проверки React state. Балансы, токены, транзакции, auth, RPC, backend и router отсутствуют. Общий UI-пакет содержит тему shadcn и Button, используемый в Wallet.
 
 ## Будущие обязанности
 
-Единый целевой [стандарт структуры frontend](../05-Engineering/Frontend-Structure.md) определяет apps/frontend, app/pages/features/shared и общий shadcn/ui-пакет. Он пока не внедрён: текущие пути и конфигурации ниже сохранены. Способ runtime-доставки UI через Shell или сборку потребителей открыт.
+Единый целевой [стандарт структуры frontend](../05-Engineering/Frontend-Structure.md) определяет apps/frontend, app/pages/features/shared и общий shadcn/ui-пакет. Приложения перенесены в apps/frontend, подготовлен @chillbounce/ui; внутреннее разделение app/pages/features/shared ещё не внедрено. Сейчас UI собирается потребителями, runtime-раздача UI через Shell не настроена.
+
+## Общие стили и добавление UI
+
+[UI-пакет](../../apps/frontend/packages/ui/package.json) экспортирует исходники компонентов, утилит и CSS. Tailwind подключён к Vite обоих приложений; index.css импортирует общую тему и явно включает src UI-пакета через @source. Shell загружает CSS в bootstrap, Wallet — в экспортируемом компоненте, чтобы стили подключались и при загрузке через Federation. Тема содержит светлые и тёмные токены; переключатель темы пока не реализован.
+
+Компоненты добавляются непосредственно в UI-пакет из корня репозитория:
+
+```powershell
+pnpm dlx shadcn@latest add button -c apps/frontend/packages/ui
+```
+
+components.json находится в UI-пакете (base-nova, neutral, rsc: false); конфиги CLI в приложениях при таком способе не нужны. Импорт: `import { Button } from '@chillbounce/ui/components/button'`. Button уже добавлен и используется в Wallet; повторный add требуется только для обновления компонента. @base-ui/react и class-variance-authority установлены в UI-пакете: при ручной подготовке CLI add не установил эти базовые зависимости автоматически.
+
+## Будущие сценарии Shell и Wallet
 
 Статус: согласованы, не реализованы.
 
@@ -55,7 +69,7 @@ Standalone Wallet остаётся способом локального зап�
 
 Shell: http://127.0.0.1:5173. Standalone wallet: http://127.0.0.1:5174. Dev и preview используют эти же порты, поэтому запускаются по очереди. strictPort запрещает незаметный переход на следующий порт. Wallet разрешает cross-origin доступ из shell origins http://127.0.0.1:5173 и http://localhost:5173; wildcard CORS не используется. Оба имени loopback поддержаны после сообщения пользователя о блокировке CORS при открытии shell через localhost.
 
-Перед локальным build/preview скопируйте [apps/shell/.env.example](../../apps/shell/.env.example) в apps/shell/.env.local. Пример содержит только публичный URL remote. Для dev предусмотрено локальное значение по умолчанию; для build/preview URL должен быть задан явно. VITE_WALLET_REMOTE_URL — абсолютный HTTP(S) URL remoteEntry.js; credentials и другие протоколы запрещены. VITE-переменные попадают в клиентскую конфигурацию и не подходят для секретов. В сборке URL фиксируется, смена значения для уже собранного приложения требует пересборки shell. Preview-переменная сама по себе не переписывает готовые chunks.
+Перед локальным build/preview скопируйте [apps/frontend/shell/.env.example](../../apps/frontend/shell/.env.example) в apps/frontend/shell/.env.local. Пример содержит только публичный URL remote. Для dev предусмотрено локальное значение по умолчанию; для build/preview URL должен быть задан явно. VITE_WALLET_REMOTE_URL — абсолютный HTTP(S) URL remoteEntry.js; credentials и другие протоколы запрещены. VITE-переменные попадают в клиентскую конфигурацию и не подходят для секретов. В сборке URL фиксируется, смена значения для уже собранного приложения требует пересборки shell. Preview-переменная сама по себе не переписывает готовые chunks.
 
 ## Сбои и проверки
 

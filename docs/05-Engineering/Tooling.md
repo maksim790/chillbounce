@@ -4,7 +4,7 @@
 
 ## Версии и установка
 
-Прямые devDependencies закреплены точными версиями в [package.json](../../package.json); единый [pnpm-lock.yaml](../../pnpm-lock.yaml) хранится в Git. [pnpm-workspace.yaml](../../pnpm-workspace.yaml) включает `apps/*` и `packages/*`; shared workspace lockfile включён по умолчанию. Корень private.
+Прямые devDependencies закреплены точными версиями в [package.json](../../package.json); единый [pnpm-lock.yaml](../../pnpm-lock.yaml) хранится в Git. [pnpm-workspace.yaml](../../pnpm-workspace.yaml) включает `apps/frontend/*`, `apps/frontend/packages/*`, `apps/api` и `packages/*`; shared workspace lockfile включён по умолчанию. Корень private.
 
 При первой установке pnpm 12 автоматически добавил точечный `minimumReleaseAgeExclude: [prettier@3.10.1]` для выбранного свежего stable-релиза. Исключение ограничено этой точной версией; общий release-age контроль не отключён. Lockfile pnpm 12 содержит несколько YAML-документов, в том числе зависимости самого package manager; это один файл, сгенерированный pnpm, его не нужно вручную объединять или форматировать.
 
@@ -26,10 +26,10 @@ ESLint требует Node.js `^20.19.0 || ^22.13.0 || >=24`; проект ис�
 
 ## Расширение будущими пакетами
 
-Для frontend согласован отдельный [целевой стандарт](Frontend-Structure.md): приложения и UI-пакет будут сгруппированы в apps/frontend рядом с будущим apps/api. Текущие workspace-patterns и исходники пока остаются прежними. При будущем переносе необходимо адаптировать discovery, TS/ESLint/Vite paths и ссылки; эта документационная задача не устанавливает shadcn/Tailwind и не меняет команды. Рекомендации ниже о текущих apps/* и packages/* описывают существующую конфигурацию, а не готовую поддержку вложенного frontend.
+Для frontend согласован отдельный [целевой стандарт](Frontend-Structure.md): приложения и UI-пакет сгруппированы в apps/frontend рядом с будущим apps/api. Workspace-patterns, пути TS и ESLint адаптированы к вложенной структуре. Tailwind подключён к обоим Vite-приложениям; общая тема, утилиты shadcn и Button находятся в @chillbounce/ui.
 
-- Создавайте реальные пакеты с package.json в `apps/*` или `packages/*`; уже есть shell и wallet. Их команды, версии React/Vite/federation и env — в [Frontend](../02-System/Frontend.md).
-- В tsconfig пакета задайте `extends: "../../tsconfig.base.json"`. База задаёт ES2022, strict и проверку регистра путей. `lib: ["ES2022"]` и `types: []` исключают неявные browser/Node globals. Приложение добавляет нужные `lib`/`types`, JSX, module/moduleResolution, decorators, emit и input/output options. Никаких runtime-специфичных настроек в базе нет.
+- Создавайте реальные frontend-приложения с package.json в `apps/frontend/*`, общие frontend-пакеты — в `apps/frontend/packages/*`, межплатформенные пакеты — в `packages/*`. Команды, версии React/Vite/federation и env — в [Frontend](../02-System/Frontend.md).
+- В tsconfig frontend-приложения задайте `extends: "../../../tsconfig.base.json"`, frontend-пакета — `"../../../../tsconfig.base.json"`, корневого пакета из packages — `"../../tsconfig.base.json"`. База задаёт ES2022, strict и проверку регистра путей. `lib: ["ES2022"]` и `types: []` исключают неявные browser/Node globals. Приложение добавляет нужные `lib`/`types`, JSX, module/moduleResolution, decorators, emit и input/output options. Никаких runtime-специфичных настроек в базе нет.
 - Добавьте в пакет собственный `typecheck` script. Корневой `pnpm -r --if-present run typecheck` исключает корень и запускает существующие scripts; `--if-present` допускает отсутствие script, а ошибки существующих scripts остаются ошибками. Сейчас проверяются frontend и Node-конфигурации shell/wallet. В Node configs локально включён skipLibCheck из-за сторонних Module Federation SDK declarations; свой TS-код остаётся strict. Не включайте `includeWorkspaceRoot`, чтобы избежать рекурсии.
 - [ESLint Flat Config](../../eslint.config.mjs) применяет recommended JS и TS правила, а к TSX приложений — React Hooks и Vite React Refresh. Type-aware lint и NestJS plugins не подключены. eslint-config-prettier расположен последним; Prettier работает отдельно.
 - [Prettier](../../.prettierrc.json) использует один стиль: singleQuote true, endOfLine lf, tabWidth 4, useTabs true, semi true, printWidth 80. Пользователь сменил отступы на табуляцию и поручил сохранить эту настройку. [Ignore](../../.prettierignore) исключает генерируемые файлы, зависимости и кеши. Lockfile генерируется pnpm. Проверка форматирования охватывает и vault.
