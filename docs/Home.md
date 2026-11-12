@@ -23,8 +23,11 @@ Chillbounce — планируемая кастодиальная платфор
 - [Карта покрытия источников](06-Sources/Index.md)
 - [Инструкции проекта](../AGENTS.md)
 
+Будущие обязанности общей оболочки и всех сценариев кошелька согласованы отдельно: [карта Shell/Wallet](02-System/Frontend.md#будущие-обязанности). Бизнес-экраны пока не реализованы; назначение crypto открыто.
+
 ## Задачи
 
+- [Документировать будущие обязанности Shell и Wallet — done](Tasks/document-shell-wallet-responsibilities.md)
 - [Frontend: shell и remote wallet — done](Tasks/frontend-shell-wallet.md)
 - [Инициализация TypeScript monorepo на pnpm Workspaces — done](Tasks/initialize-monorepo.md)
 - [Инициализация Git-репозитория](Tasks/initialize-git-repository.md)

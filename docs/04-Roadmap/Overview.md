@@ -24,7 +24,11 @@ Double-entry ledger, blockchain integration, обработка операций
 
 ## Инфраструктура разработки
 
-По последующему [тикету monorepo](../Tasks/initialize-monorepo.md) настроена основа pnpm Workspaces, TypeScript, ESLint и Prettier без Nx. По [frontend-тикету](../Tasks/frontend-shell-wallet.md) добавлены технические shell и wallet с Module Federation, локальным счётчиком и обработкой сбоя remote. Это не реализация пользовательских возможностей выше. Crypto/admin, api (NestJS), worker и packages/ui, contracts, config остаются будущими задачами; их исходников нет.
+По последующему [тикету monorepo](../Tasks/initialize-monorepo.md) настроена основа pnpm Workspaces, TypeScript, ESLint и Prettier без Nx. По [frontend-тикету](../Tasks/frontend-shell-wallet.md) добавлены технические shell и wallet с Module Federation, локальным счётчиком и обработкой сбоя remote. Это не реализация пользовательских возможностей выше. Admin, api (NestJS), worker и packages/ui, contracts, config остаются будущими задачами; их исходников нет. Crypto был намечен ранее, его назначение пока открыто.
+
+## Распределение будущих frontend-возможностей
+
+Согласована [карта обязанностей Shell/Wallet](../02-System/Frontend.md#будущие-обязанности): общий каркас, навигация и frontend-доступ в Shell; все пользовательские операции кошелька в Wallet. Назначение crypto ещё не определено; его прежнее упоминание не задаёт отдельного финансового раздела. Admin остаётся будущим мониторингом. Это документационное решение без новых экранов и без утверждения порядка их разработки; auth/router/API требуют последующих задач.
 
 ## Дальнейшее уточнение
 

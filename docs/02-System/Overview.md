@@ -14,6 +14,8 @@
 
 Shell host и wallet remote созданы на React/Vite с @module-federation/vite; пока это технический экран, без бизнес-данных и router. Crypto/admin remotes, api (NestJS), worker, packages/ui/contracts/config из [исходного состава](../Tasks/initialize-monorepo.md) ещё не созданы. См. [решения](../03-Decisions/Decision-Index.md) и [roadmap](../04-Roadmap/Overview.md). Backend-модули, бизнес-контракты, federation deployment и модель развёртывания worker пока не установлены.
 
+Будущие обязанности Shell и Wallet теперь [согласованы](Frontend.md#будущие-обязанности): общая оболочка, навигация и frontend-доступ в Shell, все пользовательские сценарии кошелька в Wallet. Назначение crypto оставлено открытым, admin — будущий мониторинг. Это уточняет прежний перечень remotes, не добавляя кода или backend; контракты сессии, маршрутизации и API остаются нерешёнными.
+
 ## Локальный Git
 
 2026-11-12 выполнена согласованная [инициализация репозитория](../Tasks/initialize-git-repository.md): `git init -b main` создал Git в корне Chillbounce. Первый коммит `chore: initialize repository` включает существующую проектную документацию, включая README. Создана dev от main; последующие задачи используют feature-ветки от dev. Проверки и доказательства завершения зафиксированы в тикете. При той инициализации remote не был настроен.
