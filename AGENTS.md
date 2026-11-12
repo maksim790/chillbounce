@@ -34,7 +34,11 @@ Workspace использует pnpm без Nx. Команды определен
   completed logical part as work progresses through a ticket, leaving the
   project in a working state. For a task group, commit progress within
   each child ticket on the group's shared feature branch.
-- Run applicable mandatory checks before committing. Fix failed checks.
+- Before each commit, format the code files changed by the task with the
+  repository's Prettier configuration (`pnpm exec prettier <files> --write`).
+  Limit formatting to task-related files; do not reformat unrelated work.
+  Run applicable mandatory checks after formatting and before committing.
+  Fix failed checks.
   If a check is unavailable, committing is allowed only with an explicit
   explanation of the reason and verification limitations.
 - Use a short conventional commit subject and a concise body for broad changes.
