@@ -11,6 +11,8 @@
 
 ## Будущие обязанности
 
+Единый целевой [стандарт структуры frontend](../05-Engineering/Frontend-Structure.md) определяет apps/frontend, app/pages/features/shared и общий shadcn/ui-пакет. Он пока не внедрён: текущие пути и конфигурации ниже сохранены. Способ runtime-доставки UI через Shell или сборку потребителей открыт.
+
 Статус: согласованы, не реализованы.
 
 Источник: [дизайн обязанностей v1](../superpowers/specs/2026-11-12-shell-wallet-responsibilities-design.md), подтверждённый пользователем 2026-11-12; [документационный тикет](../Tasks/document-shell-wallet-responsibilities.md). Shell отвечает за общую оболочку и доступ, Wallet — за все пользовательские сценарии кошелька.

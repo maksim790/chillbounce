@@ -19,6 +19,7 @@ Chillbounce — планируемая кастодиальная платфор
 - [README проекта](../README.md)
 - [Definition of Done и проверки](05-Engineering/Testing-Strategy.md)
 - [Инструменты monorepo и расширение конфигураций](05-Engineering/Tooling.md)
+- [Целевой стандарт структуры frontend и shadcn/ui](05-Engineering/Frontend-Structure.md)
 - [Исходный бриф](06-Sources/Project-Brief.md)
 - [Карта покрытия источников](06-Sources/Index.md)
 - [Инструкции проекта](../AGENTS.md)
@@ -27,6 +28,7 @@ Chillbounce — планируемая кастодиальная платфор
 
 ## Задачи
 
+- [Стандарт структуры frontend и shadcn/ui — done](Tasks/frontend-structure-shadcn.md)
 - [Документировать будущие обязанности Shell и Wallet — done](Tasks/document-shell-wallet-responsibilities.md)
 - [Frontend: shell и remote wallet — done](Tasks/frontend-shell-wallet.md)
 - [Инициализация TypeScript monorepo на pnpm Workspaces — done](Tasks/initialize-monorepo.md)
