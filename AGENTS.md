@@ -31,7 +31,9 @@ Chillbounce — планируемая кастодиальная криптов
   history without inventing rationale. Never store secrets, private keys,
   or real user data in documentation.
 - Split non-trivial work into coherent parts. Verify and commit each
-  completed logical part, leaving the project in a working state.
+  completed logical part as work progresses through a ticket, leaving the
+  project in a working state. For a task group, commit progress within
+  each child ticket on the group's shared feature branch.
 - Run applicable mandatory checks before committing. Fix failed checks.
   If a check is unavailable, committing is allowed only with an explicit
   explanation of the reason and verification limitations.
@@ -49,7 +51,8 @@ Chillbounce — планируемая кастодиальная криптов
 - `dev` is the integration branch. Do not develop or commit task changes
   directly on it.
 - Unless the user instructs otherwise, create a separate feature branch
-  from `dev` for each task requiring file changes. When continuing the same
+  from `dev` for each standalone task or task group requiring file changes.
+  Child tickets in a group share that branch. When continuing the same
   task on its existing feature branch, reuse it; do not recreate or rebase
   it automatically.
 - Before creating the branch, inspect the current branch, working tree,
@@ -69,30 +72,42 @@ Chillbounce — планируемая кастодиальная криптов
 
 ## Task completion and integration
 
-- After the entire task is completed and committed, offer exactly three
-  choices in this order:
-  1. Merge the feature branch into `dev` and push `dev`.
-  2. Create a PR into `dev`.
-  3. Leave changes on the feature branch without merging, pushing,
-     or creating a PR.
+- Default completion is automatic local merge into `dev`, verification of
+  the integrated result, and a normal push of `dev` to its remote branch.
+  This is standing authorization for those actions after completing the
+  agreed scope; do not ask again unless a blocking condition below applies.
+  Explicit task-specific user instructions take precedence.
+- For a standalone ticket, integrate after that ticket is fully completed,
+  verified, and committed. For a group, integrate only after all agreed
+  child tickets and the group's integration criteria are complete. Commit
+  progress during each ticket; intermediate commits or child completion
+  alone do not trigger merge or push. Do not execute unselected child
+  tickets merely to reach the group's integration point.
+- Do not offer push or PR options. Do not create a PR unless the user
+  explicitly requests one. Finish with a concise report of work, checks,
+  commits, and actual merge/push results, including any obstruction.
 - For analysis-only tasks or tasks requiring no changes, report the result
-  without creating an empty commit or offering integration choices.
+  without an empty commit, merge, or push.
 - Initial repository setup ends with a report of the first commit, branches,
-  and verification results. Do not offer feature integration choices for it:
-  there is no feature branch to merge or open a PR from.
-- Before offering integration, inspect the complete branch diff and commit
+  and verification results. It does not trigger automatic publication.
+- Before integration, inspect the complete branch diff and commit
   list relative to `dev`. If unrelated changes are present, report them and
   obtain clarification before including them in a merge or PR; do not
   silently remove or rewrite those commits.
-- Present these choices once at task completion, not after intermediate commits.
-  Mark unavailable actions and explain missing prerequisites.
-- Wait for the user's selection before merging, pushing, or creating a PR.
-  Creating a PR includes permission to push the feature branch as needed.
-- Before an authorized merge, fetch again when a remote is configured and
+- Before merging, fetch again when a remote is configured and
   recheck `dev`. Apply the same fast-forward-only update policy; stop on
   divergence or an unclear target. If a push is rejected because the remote
   changed, fetch and reassess without force-pushing; resolve any new
   divergence with the user.
+- Determine the remote and destination branch from the established project
+  configuration. If they are missing or ambiguous, report the obstruction
+  without inventing a remote or claiming publication. A configured origin
+  and an unambiguous dev destination allow creating remote dev by a normal
+  push if that remote branch does not exist yet. Do not push other branches
+  or tags as part of the default completion.
+- Failed mandatory checks block integration. If a check is unavailable,
+  report the reason and verification limits under the agreed check policy;
+  never present an unavailable check as passed.
 - If an authorized merge encounters conflicts, resolve unambiguous conflicts
   independently. Obtain clarification when resolution requires choosing
   behavior not already established by the task or accepted requirements.
@@ -101,6 +116,11 @@ Chillbounce — планируемая кастодиальная криптов
   also verify the resolved state before creating the merge commit. Apply
   the same policy for failed or unavailable checks. Do not push a result
   with failed mandatory checks; report the failure without discarding work.
+- After successful integration, leave the working branch on `dev` and keep
+  the feature branch. Branch deletion, force pushes, and promotion to main
+  still require separate explicit authorization. If integration or push is
+  blocked, preserve work and report the exact incomplete step; do not
+  perform a destructive rollback automatically.
 
 <!-- context7 -->
 ## Актуальная документация библиотек

@@ -25,6 +25,7 @@ Chillbounce — планируемая кастодиальная платфор
 
 - [Инициализация Git-репозитория](Tasks/initialize-git-repository.md)
 - [README с навигацией по документации](Tasks/add-root-readme.md)
+- [Коммиты по ходу тикетов, merge и push завершённой задачи](Tasks/auto-merge-completed-features.md)
 
 ## Ограничения
 
