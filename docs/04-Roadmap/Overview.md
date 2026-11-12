@@ -22,6 +22,10 @@ Double-entry ledger, blockchain integration, обработка операций
 
 Монорепозиторий, микрофронтенды с Module Federation и backend-монолит NestJS зафиксированы в [индексе решений](../03-Decisions/Decision-Index.md).
 
+## Инфраструктура разработки
+
+По последующему [тикету monorepo](../Tasks/initialize-monorepo.md) настроена основа pnpm Workspaces, TypeScript, ESLint и Prettier без Nx. Это не реализация пользовательских возможностей выше. Далее планируются apps/shell, wallet, crypto, admin (React/Vite host и remotes), api (NestJS), worker и packages/ui, contracts, config. Они ещё не созданы; их зависимости и команды добавляются отдельными задачами.
+
 ## Дальнейшее уточнение
 
 [Открытые вопросы](Open-Questions.md) перечисляют пробелы, которые нужно разрешать при проектировании соответствующей части. Тикеты разработки и дополнительные функции этим документом не утверждаются.
