@@ -46,6 +46,6 @@ python -B 'C:\Users\maksimbell\lifetime\codex-workflow\skills\setup-project\scri
 
 На момент первоначальной инициализации исходников и инструментов не было. Теперь [package.json](../../package.json) определяет lint, lint:fix, format, format:check и typecheck; установка и описание конфигураций — в [Tooling](Tooling.md), фактические результаты — в [тикете monorepo](../Tasks/initialize-monorepo.md). Для изменений JS/TS/config применяются lint и format:check; при появлении package typecheck scripts применяется их рекурсивный запуск. Пустой typecheck без пакетов не доказывает проверку типов будущих приложений.
 
-Приложений, их тестов/сборки, CI, API-схем и миграций пока нет. Проверки этих областей недоступны; успешные результаты приложения или CI не заявляются. Конфигурационные изменения этой задачи проверяются CLI и read-only инспекциями без фиктивных проектов и тестовых файлов.
+По [frontend-тикету](../Tasks/frontend-shell-wallet.md) появились shell/wallet и реальные dev/build/preview/typecheck scripts. Для них применяются lint, format:check, typecheck и build; runtime federation проверяет пользователь в браузере. По его явному решению Playwright и другая тестовая инфраструктура в этом тикете не добавляются и не запускаются. Это исключение не отменяет проверки будущей финансовой или blockchain-логики. CI, API-схем, миграций и backend пока нет; успешные результаты этих областей не заявляются.
 
 Актуальное состояние реализации: [обзор системы](../02-System/Overview.md). Пределы проверенного материала: [карта источников](../06-Sources/Index.md).

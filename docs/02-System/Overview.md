@@ -4,15 +4,15 @@
 
 ## Реализация
 
-В проверенном каталоге не найдены приложения, пакеты, backend-модули, frontend-модули, API-схемы, схема данных, миграции, хранилища, очереди, механизмы безопасности, тесты, CI или конфигурация развёртывания. Это результат локального осмотра, а не утверждение об отсутствии внешних репозиториев или документов.
+При первоначальном осмотре не найдены приложения, пакеты, backend-модули, frontend-модули, API-схемы, схема данных, миграции, хранилища, очереди, механизмы безопасности, тесты, CI или конфигурация развёртывания. Это результат локального осмотра, а не утверждение об отсутствии внешних репозиториев или документов.
 
-После инициализации документации настроена инфраструктура pnpm Workspaces: корневой private package, apps/ и packages/ с .gitkeep, общий lockfile, TypeScript base config, ESLint Flat Config и Prettier. Nx не используется. Приложений и библиотек пока нет. Команды инфраструктуры и версии — в [руководстве](../05-Engineering/Tooling.md), результаты проверок — в [тикете](../Tasks/initialize-monorepo.md). Root typecheck без пакетов не проверяет код приложений. Runtime-диаграммы и описания реализованных модулей не создавались, поскольку для них нет доказательств в коде.
+Настроены pnpm Workspaces, общий lockfile, TypeScript base config, ESLint Flat Config и Prettier. Nx не используется. Добавлены технические React/Vite приложения shell и wallet с Module Federation; пользователь подтвердил standalone wallet и работу remote/счётчика внутри shell в dev и production preview. Приёмка и ограничения записаны в [тикете frontend](../Tasks/frontend-shell-wallet.md). Root typecheck проверяет оба приложения и их Vite-конфигурации; команды — в [руководстве](../05-Engineering/Tooling.md). Backend, общие библиотеки, API и финансовые механизмы ещё не созданы. Исторические результаты настройки пустого workspace сохранены в [тикете monorepo](../Tasks/initialize-monorepo.md).
 
 ## Планируемая архитектура
 
-В текущей frontend-задаче добавляются исходники shell host и wallet remote; контракты и команды описаны в [Frontend](Frontend.md), состояние приёмки — в [тикете](../Tasks/frontend-shell-wallet.md). Остальные перечисленные ниже приложения остаются планами.
+Контракты и команды shell/wallet описаны в [Frontend](Frontend.md), состояние приёмки — в [тикете](../Tasks/frontend-shell-wallet.md). Остальные приложения остаются планами.
 
-Основа монорепозитория настроена. Будущие React/Vite микрофронтенды shell (host), wallet, crypto и admin (remotes), api (NestJS), worker (фоновая обработка), packages/ui, contracts и config заданы в [тикете](../Tasks/initialize-monorepo.md), но не созданы. Module Federation и backend-монолит остаются планами. См. [решения](../03-Decisions/Decision-Index.md) и [запланированный объём](../04-Roadmap/Overview.md). Federation runtime, backend-модули, публичные контракты и модель развёртывания worker пока не установлены.
+Shell host и wallet remote созданы на React/Vite с @module-federation/vite; пока это технический экран, без бизнес-данных и router. Crypto/admin remotes, api (NestJS), worker, packages/ui/contracts/config из [исходного состава](../Tasks/initialize-monorepo.md) ещё не созданы. См. [решения](../03-Decisions/Decision-Index.md) и [roadmap](../04-Roadmap/Overview.md). Backend-модули, бизнес-контракты, federation deployment и модель развёртывания worker пока не установлены.
 
 ## Локальный Git
 

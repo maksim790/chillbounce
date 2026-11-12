@@ -1,6 +1,6 @@
 # Инструменты monorepo
 
-Объём согласован в [тикете](../Tasks/initialize-monorepo.md) и плане v2: pnpm Workspaces без Nx и замещающего task runner. Исходники приложений, CI и framework plugins ещё не созданы.
+Основа согласована в [тикете monorepo](../Tasks/initialize-monorepo.md): pnpm Workspaces без Nx и замещающего task runner. По [frontend-тикету](../Tasks/frontend-shell-wallet.md) добавлены shell/wallet, React ESLint plugins и команды dev/build/preview. CI и тестовая инфраструктура не созданы.
 
 ## Версии и установка
 
@@ -26,14 +26,14 @@ ESLint требует Node.js `^20.19.0 || ^22.13.0 || >=24`; проект ис�
 
 ## Расширение будущими пакетами
 
-- Создавайте реальные пакеты с package.json в `apps/*` или `packages/*`; сейчас эти каталоги пусты, кроме `.gitkeep`.
+- Создавайте реальные пакеты с package.json в `apps/*` или `packages/*`; уже есть shell и wallet. Их команды, версии React/Vite/federation и env — в [Frontend](../02-System/Frontend.md).
 - В tsconfig пакета задайте `extends: "../../tsconfig.base.json"`. База задаёт ES2022, strict и проверку регистра путей. `lib: ["ES2022"]` и `types: []` исключают неявные browser/Node globals. Приложение добавляет нужные `lib`/`types`, JSX, module/moduleResolution, decorators, emit и input/output options. Никаких runtime-специфичных настроек в базе нет.
-- Добавьте в пакет собственный `typecheck` script, например с выбранным для него tsconfig. Корневой `pnpm -r --if-present run typecheck` исключает корень и запускает существующие scripts; `--if-present` допускает отсутствие script, а ошибки существующих scripts остаются ошибками. При пустом workspace код приложений не проверяется. Не включайте `includeWorkspaceRoot`, чтобы избежать рекурсии.
-- [ESLint Flat Config](../../eslint.config.mjs) применяет recommended JS и TS правила к соответствующим файлам, без type-aware lint и framework plugins. React/NestJS правила и runtime globals добавляются при создании приложений. eslint-config-prettier расположен последним; Prettier работает отдельно.
+- Добавьте в пакет собственный `typecheck` script. Корневой `pnpm -r --if-present run typecheck` исключает корень и запускает существующие scripts; `--if-present` допускает отсутствие script, а ошибки существующих scripts остаются ошибками. Сейчас проверяются frontend и Node-конфигурации shell/wallet. В Node configs локально включён skipLibCheck из-за сторонних Module Federation SDK declarations; свой TS-код остаётся strict. Не включайте `includeWorkspaceRoot`, чтобы избежать рекурсии.
+- [ESLint Flat Config](../../eslint.config.mjs) применяет recommended JS и TS правила, а к TSX приложений — React Hooks и Vite React Refresh. Type-aware lint и NestJS plugins не подключены. eslint-config-prettier расположен последним; Prettier работает отдельно.
 - [Prettier](../../.prettierrc.json) использует один стиль: singleQuote true, endOfLine lf, tabWidth 4, useTabs true, semi true, printWidth 80. Пользователь сменил отступы на табуляцию и поручил сохранить эту настройку. [Ignore](../../.prettierignore) исключает генерируемые файлы, зависимости и кеши. Lockfile генерируется pnpm. Проверка форматирования охватывает и vault.
 - [Настройки VS Code](../../.vscode/settings.json) включают formatOnSave и явно назначают esbenp.prettier-vscode для TypeScript и JavaScript. Это перекрывает языковые пользовательские настройки другого форматтера. Расширение читает корневой .prettierrc.json; правила не дублируются в settings.json. В Git включён только этот общий файл из .vscode; остальные файлы папки остаются исключёнными. Срабатывание Ctrl+S подтверждено пользователем в беседе 2026-11-12.
 
-Кеширование результатов задач не настраивается. Запуск build/test появится вместе с реальными пакетами и их scripts.
+Кеширование результатов задач не настраивается. Реальные dev/build/preview scripts доступны; test scripts и Playwright исключены из frontend-задачи по решению пользователя. Проверки браузера пользователь выполняет вручную.
 
 ## Документационные основания
 

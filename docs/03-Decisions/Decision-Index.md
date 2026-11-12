@@ -18,4 +18,8 @@
 
 Источник — запрос пользователя и согласованный [тикет monorepo](../Tasks/initialize-monorepo.md), план v2. pnpm Workspaces, TypeScript strict, ESLint Flat Config и Prettier выбраны пользователем; Nx исключён его последующим прямым поручением. Другой task runner не добавляется. apps/api предназначен для будущего NestJS, apps/worker — для фоновой обработки; packages/ui, contracts и config пока только планируются. Причины выбора инструментов и сравнение альтернатив пользователем не сообщены и не реконструируются. Текущие настройки и техническое ограничение версии TypeScript описаны в [руководстве](../05-Engineering/Tooling.md).
 
+## Техническая основа frontend от 2026-11-12
+
+По согласованным [дизайну v1](../superpowers/specs/2026-11-12-frontend-shell-wallet-design.md) и [тикету](../Tasks/frontend-shell-wallet.md) созданы shell host и wallet remote/standalone на React/Vite с @module-federation/vite. Публичный модуль wallet/Wallet — компонент без props и собственного root. Общие React/react-dom singleton и loaded-first позволяют shell показывать fallback при недоступном remote. Это техническая связка; crypto/admin, backend и продуктовые экраны остаются планами. Актуальные версии и ограничения — в [Frontend](../02-System/Frontend.md). Таблица выше сохраняет исходные требования; её первоначальные наблюдения об отсутствии приложений заменены этим уточнением для shell/wallet.
+
 Связанные страницы: [продукт](../01-Product/Overview.md), [система](../02-System/Overview.md), [открытые вопросы](../04-Roadmap/Open-Questions.md).

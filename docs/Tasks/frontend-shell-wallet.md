@@ -1,13 +1,13 @@
 # Frontend: shell и remote wallet
 
 Created: 2026-11-12T15:52:37Z
-Status: ready
+Status: done
 
 ## Цель и запрос
 
 Начать frontend Chillbounce с проверяемой связки shell host и wallet remote на React, TypeScript, Vite и Module Federation. Пользователь 2026-11-12 уточнил: «в этой задаче сделаем shell и remote wallet — но делать большие интерфейсы пока не надо — ими займемся позже». Результат — техническая основа двух приложений; пользовательские сценарии кошелька остаются будущими задачами.
 
-## Доказательства текущего состояния
+## Начальное состояние при подготовке
 
 - [AGENTS.md](../../AGENTS.md), [Home](../Home.md), [система](../02-System/Overview.md) и [Tooling](../05-Engineering/Tooling.md): pnpm Workspaces настроен, Nx не используется; apps/ и packages/ пока без приложений.
 - [package.json](../../package.json) содержит lint, lint:fix, format, format:check и рекурсивный typecheck, но пока не содержит React/Vite и package build/dev scripts.
@@ -37,7 +37,7 @@ Status: ready
 
 План v1 не согласован: пользователь выбрал «Внести изменения» и уточнил «не надо запускать playwright тесты». [Implementation plan v2](../superpowers/plans/2026-11-12-frontend-shell-wallet.md) без Playwright и другой тестовой инфраструктуры, с CLI и ручными browser checks согласован отдельным ответом «Подтвердить план»; запись согласования: 2026-11-12T16:15:03Z. Пользователь отдельно выбрал «Основной агент (рекомендуется)»; делегирование не требуется. Финальный review завершён, тикет ready, Created сохранён. Fast/Full определит start-task по актуальным фактам. Подготовка не устанавливает зависимости и не создаёт приложения.
 
-Согласование плана v2 покрывает один самостоятельный тикет и все восемь критериев: два минимальных приложения, Module Federation, standalone wallet, loading/error UI, CLI и ручные browser проверки, документация. Playwright-тесты не запускать; не добавлять тестовую инфраструктуру. Реализация пока не начата: следующий выбор пользователя — начать через start-task либо закончить подготовку для последующего выполнения. Точный handoff: docs/Tasks/frontend-shell-wallet.md; команда для другой беседы — `$start-task frontend-shell-wallet.md`.
+Согласование плана v2 покрывает один самостоятельный тикет и все восемь критериев: два минимальных приложения, Module Federation, standalone wallet, loading/error UI, CLI и ручные browser проверки, документация. Пользователь отдельно выбрал «Начать выполнение». Playwright-тесты не запускались, тестовая инфраструктура не добавлялась.
 
 ## Ход выполнения
 
@@ -55,6 +55,12 @@ Task 1, CLI: установка --strict-peer-dependencies и lint прошли;
 
 Последующее уточнение исполнения: после отказа Computer Use пользователь сообщил «я сам проверю в браузере ты только скажи». Основной агент доводит CLI и поднимает приложения, передаёт конкретные URL/сценарии и фиксирует только подтверждённые пользователем результаты browser checks. Эта передача не отменяет проверки и не означает, что они уже пройдены. Playwright и другие test runners не запускаются.
 
-По [DoD](../05-Engineering/Testing-Strategy.md): соответствие согласованным критериям, актуальность документации и локальные Markdown-ссылки. Из существующих команд применяются pnpm lint, pnpm format:check и pnpm typecheck; pnpm install --frozen-lockfile проверит воспроизводимость после изменения зависимостей. Будущие dev/build/preview команды определены в implementation plan v2 для финального review, сейчас они не существуют. Playwright-запуски исключены решением пользователя; автоматические browser tests не являются обязательным gate этого тикета. Реализационные проверки не запускались.
+По [DoD](../05-Engineering/Testing-Strategy.md) проверены критерии, актуальность документации и локальные Markdown-ссылки. Реальные dev/build/preview команды добавлены; lint, typecheck, format:check и build прошли. `pnpm install --frozen-lockfile --strict-peer-dependencies` завершился успешно без изменения lockfile. Playwright и другие test runners не добавлялись и не запускались.
 
-Целевые проверки: loading и ошибки загрузки/рендера remote; standalone wallet; dev composition и build+preview composition; совместный React runtime и локальная интеракция; ошибка занятого порта; открытие shell без работающего wallet, восстановление после перезагрузки. Не подменять browser smoke одной успешной сборкой. Финансовые и blockchain gates неприменимы: эта логика исключена.
+## Итог приёмки и саморевью
+
+Коммиты реализации: `92aa060` (основа), `34d1b7f` (изоляция ошибок). Все восемь критериев рассмотрены основным агентом по полному diff: отдельные пакеты и scripts, динамический federation import, единый контракт компонента, shared React и hooks, loading/error UI, URL и порты, строгие TS-проекты, документация. Прямых импортов исходников wallet в shell, backend, финансовой логики и тестовых зависимостей нет. Независимые агенты не использовались по выбранному способу выполнения.
+
+Пользователь подтвердил standalone и host в dev, работу кнопки, loading через Slow 3G, fallback при отключении remote, изоляцию временной ошибки рендера и восстановление после удаления этой ошибки. В production preview подтвердил: «Да, оба работают» для standalone и host со счётчиком. На последующий вопрос об отключённом preview ответил «ХВАТИТ ПРОВЕРЯТЬ ВСЕ НОРМ!». По этому прямому указанию дальнейшие ручные проверки прекращены: отдельное подтверждение preview offline/recovery не получено и успешным не объявляется; это согласованное исключение оставшегося browser-сценария. Wallet preview восстановлен, временного исключения в исходниках и dist нет.
+
+CLI: strict frozen install, lint, format:check, оба frontend/Node typecheck и root build завершились с exit 0. Отрицательные проверки URL и strictPort дали ожидаемый ненулевой код; CORS разрешает только два документированных shell origins. Read-only docs validator: 0 errors, 0 warnings; git diff --check без ошибок. Ограничение skipLibCheck только для сторонних Node-config declarations описано в Frontend. Финансовые и blockchain gates неприменимы. Интеграция и push фиксируются в финальном отчёте по фактическому результату.

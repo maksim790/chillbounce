@@ -1,11 +1,12 @@
 # Chillbounce — база знаний
 
-Chillbounce — планируемая кастодиальная платформа для тестовых криптоактивов Ethereum Sepolia. Документация инициализирована 2026-11-12 по описанию пользователя; наличие реализации не подтверждено.
+Chillbounce — планируемая кастодиальная платформа для тестовых криптоактивов Ethereum Sepolia. Документация инициализирована 2026-11-12; техническая основа frontend shell/wallet создана, бизнес-функции ещё не реализованы.
 
 ## Продукт и система
 
 - [Описание продукта и требования](01-Product/Overview.md)
 - [Текущее состояние системы](02-System/Overview.md)
+- [Технический frontend: shell и wallet](02-System/Frontend.md)
 
 ## Решения и планы
 
@@ -24,7 +25,7 @@ Chillbounce — планируемая кастодиальная платфор
 
 ## Задачи
 
-- [Frontend: shell и remote wallet — ready](Tasks/frontend-shell-wallet.md)
+- [Frontend: shell и remote wallet — done](Tasks/frontend-shell-wallet.md)
 - [Инициализация TypeScript monorepo на pnpm Workspaces — done](Tasks/initialize-monorepo.md)
 - [Инициализация Git-репозитория](Tasks/initialize-git-repository.md)
 - [README с навигацией по документации](Tasks/add-root-readme.md)
@@ -32,4 +33,4 @@ Chillbounce — планируемая кастодиальная платфор
 
 ## Ограничения
 
-При первоначальном осмотре каталог проекта был пуст; теперь есть документация, Git и основа pnpm Workspaces с общими TypeScript/ESLint/Prettier настройками. Приложений нет. Будущий frontend — React/Vite с Module Federation; backend — NestJS. Хранилища, очереди, финансовые политики и эксплуатационная конфигурация пока не определены. Результаты и ограничения проверок находятся в тикетах.
+При первоначальном осмотре каталог проекта был пуст; теперь есть документация, Git, pnpm Workspaces, общие TypeScript/ESLint/Prettier настройки и технические приложения shell/wallet на React/Vite с Module Federation. Backend NestJS, бизнес-экраны, хранилища, очереди, финансовые политики и эксплуатационная конфигурация остаются планами. Результаты и ограничения проверок находятся в тикетах.
